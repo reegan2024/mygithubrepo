@@ -1,4 +1,4 @@
-<form style="width: 50%;margin-left: 10%; margin-top: 10%;">
+<!-- <form style="width: 50%;margin-left: 10%; margin-top: 10%;">
   <div class="row">
     <div class="col">
       <input type="text" class="form-control" placeholder="Enter email" name="email" ngModel>
@@ -7,7 +7,49 @@
       <input type="password" class="form-control" placeholder="Enter password" name="pswd" ngmodel>
     </div>
   </div>
-  
-  
+  <button mat-raised-button color="primary" class="btn btn-primary" (click)="onSubmit()">Submit</button>  
+</form> -->
+
+<form [formGroup]="productFormarray" #pFormarray="ngForm" style="padding: 5%; width: 50%;">
+  <div class="formGroup">
+    <label for="customername" class="form-label">Customer Name</label>
+    <input type="text" class="form-control" id="customername" placeholder="Customer Name" formControlName="customername"
+      pattern="[a-zA-Z\s]+">
+    <div style="height: 4px; display: block;">
+
+      <div
+        *ngIf="(pFormarray.submitted && productFormarray.get('customername')!.untouched) ||  productFormarray.get('customername')!.touched "
+        style="font-size: 10pt; margin-top: 2pt; color:red;">
+        <div *ngIf="productFormarray.get('customername')!.errors?.['required']">Enter Name</div>
+      </div>
+      <div *ngIf="productFormarray.get('customername')!.invalid" style="font-size: 10pt; margin-top: 2pt; color:red;">
+        <div *ngIf="productFormarray.get('customername')!.errors?.['pattern']">Enter valid Name</div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <label for="products" class="form-label">List of Products</label>
+  <div class="formGroup" formArrayName="productdetails">
+  <div *ngFor="let product of productdetailsarray.controls; let i=index" [formGroupName]="i">
+    
+    <input formControlName="productname" type="text" class="form-control"
+       style="margin-top: 10px; width: 50%; display: inline;">
+       <a type="button" class="btn btn-primary" style="background-color: red;"
+       (click)="removeProduct(i)">(-)</a>
+    <div style="height: 10px; display: block;">
+
+      <div
+        *ngIf="(pFormarray.submitted && productdetailsarray.at(i).get('productname')?.untouched) ||  productdetailsarray.at(i).get('productname')?.touched "
+        style="font-size: 10pt; margin-top: 2pt; color:red;">
+        <div *ngIf="productdetailsarray.at(i).get('productname')?.errors?.['required']">Enter Product Name</div>
+      </div>
+    </div>
+    
+  </div>
+  </div>
+  <br>
+  <a type="button" class="btn btn-secondary" style="background-color: green;" (click)="addNewProduct()">Add(+)</a>
+  <br>
+  <button type="submit" mat-raised-button class="btn btn-primary" color="primary" style="margin-top: 20px;"
+    (click)="onSubmit(productFormarray.valid)">Submit</button>
 </form>
-<button mat-raised-button color="primary" class="btn btn-primary" (click)="onSubmit()">Submit</button>  
