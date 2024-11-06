@@ -1,0 +1,18 @@
+<div id="billpagecontent" class="p-4" [class.hidden]="showContent">
+    <p>Customer Name: {{billpagecontent.customername}}</p>
+    <table class="table" style="margin-top: 20px; width:fit-content;">
+  
+      <thead>
+        <tr>
+          <td style="width:40%">
+            List of Product Names
+          </td>
+        </tr>
+      </thead>
+ 
+      <tr *ngFor="let product of billpagecontent.productdetails" style="padding: 10pt; background-color: rgb(223, 180, 123);">
+        <td  style="padding: 10pt; font-size: 14pt;">{{product.productname}}</td>
+      </tr>
+
+    </table>
+  </div>

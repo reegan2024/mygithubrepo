@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { DialoguepopupComponent } from './dialoguepopup/dialoguepopup.component';
 import { FormGroup, FormControl, FormArray, FormBuilder, NgForm, Validators, ValidatorFn, ValidationErrors, AbstractControl, FormGroupDirective } from '@angular/forms'
+import { PdfcontentService } from './pdfcontent.service';
 
 @Component({
   selector: 'app-root',
@@ -10,9 +11,11 @@ import { FormGroup, FormControl, FormArray, FormBuilder, NgForm, Validators, Val
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-productFormarray!: FormGroup;
-items!: FormArray;  
-  constructor(public matdialog:MatDialog){
+  billcontent: any = {};
+
+  productFormarray!: FormGroup;
+  items!: FormArray;
+  constructor(public matdialog: MatDialog, public pdfService: PdfcontentService) {
 
     this.productFormarray = new FormGroup({
       customername: new FormControl('', [Validators.required]),
@@ -21,13 +24,13 @@ items!: FormArray;
 
 
   }
- 
+
   ngOnInit(): void {
     this.addNewProduct();
   }
 
   addNewProduct() {
-    
+
     this.items = this.productFormarray.get('productdetails') as FormArray;
     const newProduct = this.createNewProduct();
     this.items.push(newProduct);
@@ -51,21 +54,24 @@ items!: FormArray;
   }
 
 
-  openDialog(){
-    let dialogpopupref=this.matdialog.open(DialoguepopupComponent);
-    dialogpopupref.afterClosed().subscribe(result=>{
-     console.log("dialog result is" +result);
-      if(result=="true"){
+  openDialog() {
+    let dialogpopupref = this.matdialog.open(DialoguepopupComponent);
+    dialogpopupref.afterClosed().subscribe(result => {
+      console.log("dialog result is" + result);
+      if (result == "true") {
         console.log("in true");
-     }
-    });
+        this.billcontent = this.productFormarray.value;
+        this.pdfService.updatePdfContent(this.billcontent);
       }
-      onSubmit(formvalue:boolean) {
-        if(formvalue==true){
-          this.openDialog();        
+    });
+  }
+  onSubmit(formvalue: boolean) {
+    this.productFormarray.markAllAsTouched();
+    if (formvalue == true) {
+      this.openDialog();
 
-        }
- 
-       }
+    }
+
+  }
   title = 'mydemo';
 }

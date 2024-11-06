@@ -9,7 +9,6 @@
   </div>
   <button mat-raised-button color="primary" class="btn btn-primary" (click)="onSubmit()">Submit</button>  
 </form> -->
-
 <form [formGroup]="productFormarray" #pFormarray="ngForm" style="padding: 5%; width: 50%;">
   <div class="formGroup">
     <label for="customername" class="form-label">Customer Name</label>
@@ -39,7 +38,7 @@
     <div style="height: 10px; display: block;">
 
       <div
-        *ngIf="(pFormarray.submitted && productdetailsarray.at(i).get('productname')?.untouched) ||  productdetailsarray.at(i).get('productname')?.touched "
+        *ngIf="productdetailsarray.at(i).get('productname')?.touched "
         style="font-size: 10pt; margin-top: 2pt; color:red;">
         <div *ngIf="productdetailsarray.at(i).get('productname')?.errors?.['required']">Enter Product Name</div>
       </div>
@@ -53,3 +52,5 @@
   <button type="submit" mat-raised-button class="btn btn-primary" color="primary" style="margin-top: 20px;"
     (click)="onSubmit(productFormarray.valid)">Submit</button>
 </form>
+<app-pagedesign></app-pagedesign>
+<router-outlet></router-outlet>

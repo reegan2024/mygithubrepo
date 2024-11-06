@@ -8,11 +8,17 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DialoguepopupComponent } from './dialoguepopup/dialoguepopup.component';
+import { PagedesignComponent } from './pagedesign/pagedesign.component';
+import { ContactComponent } from './contact/contact.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DialoguepopupComponent
+    DialoguepopupComponent,
+    PagedesignComponent,
+    ContactComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +30,7 @@ import { DialoguepopupComponent } from './dialoguepopup/dialoguepopup.component'
     ReactiveFormsModule
   ],
   providers: [],
-  bootstrap: [AppComponent],
+  bootstrap: [HomeComponent],
   entryComponents:[DialoguepopupComponent]
 })
 export class AppModule { }
