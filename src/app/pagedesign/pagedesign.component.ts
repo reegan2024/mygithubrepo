@@ -20,7 +20,8 @@ export class PagedesignComponent implements OnInit {
       if (content) {
         this.billpagecontent = content;
         let pdfcontent = document.getElementById('billpagecontent');
-        this.convetToPDF(pdfcontent);
+        setTimeout(()=>this.convetToPDF(pdfcontent),3000);
+        
       }
     });
   }
