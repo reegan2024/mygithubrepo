@@ -48,9 +48,23 @@
   </div>
   <br>
   <a type="button" class="btn btn-secondary" style="background-color: green;" (click)="addNewProduct()">Add(+)</a>
+  <br/>
+  <p></p>
+  <mat-radio-group aria-label="Select an option" formControlName="fullypaid" [(ngModel)]="fullypaidvalue">
+    <mat-radio-button value="true" [checked]="true">Fully Paid</mat-radio-button>
+    <mat-radio-button value="false">Partially Paid</mat-radio-button>
+  </mat-radio-group>
+  <p>{{fullypaidvalue}}</p>
+  <div class="formGroup" [class.d-none]="fullypaidvalue">
+    <label for="paidamount" class="form-label" style="margin-top: 10pt;">Paid Amount</label>
+    <input type="text" class="form-control form-control1" id="paidamount" formControlName="paidamount"
+      placeholder="paidamount" name="paidamount" style="margin-left: 20pt;">
+  </div>
   <br>
   <button type="submit" mat-raised-button class="btn btn-primary" color="primary" style="margin-top: 20px;"
     (click)="onSubmit(productFormarray.valid)">Submit</button>
-</form>
+
+
+  </form>
 <app-pagedesign></app-pagedesign>
 <router-outlet></router-outlet>

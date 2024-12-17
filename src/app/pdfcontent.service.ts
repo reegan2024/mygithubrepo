@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +7,7 @@ import { BehaviorSubject } from 'rxjs';
 export class PdfcontentService {
 
   constructor() { }
-  public pdfContentSource = new BehaviorSubject<any>("");
+  public pdfContentSource = new Subject<any>();
   pdfContent$ = this.pdfContentSource.asObservable();
   updatePdfContent(content: any) {
     this.pdfContentSource.next(content);

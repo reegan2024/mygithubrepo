@@ -15,11 +15,14 @@ export class AppComponent implements OnInit {
 
   productFormarray!: FormGroup;
   items!: FormArray;
+fullypaidvalue: any=true;
   constructor(public matdialog: MatDialog, public pdfService: PdfcontentService) {
 
     this.productFormarray = new FormGroup({
       customername: new FormControl('', [Validators.required]),
       productdetails: new FormArray([]),
+      fullypaid: new FormControl('true'),
+      paidamount: new FormControl()
     })
 
 
